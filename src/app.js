@@ -8,8 +8,11 @@ const server = http.createServer((req, res) => {
   res.end('CI/CD Web App is running live on Render!');
 });
 
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Chỉ mở cổng listen khi chạy trực tiếp (giúp Jest test không bị kẹt)
+if (require.main === module) {
+  server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
 module.exports = server;
