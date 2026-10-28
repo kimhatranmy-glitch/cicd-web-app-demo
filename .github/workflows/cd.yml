@@ -1,0 +1,24 @@
+name: CD Pipeline - Continuous Deployment
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline - Integration & Test"]
+    types:
+      - completed
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-to-render:
+    name: Trigger Render Deployment
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Call Render Deploy Hook
+        run: |
+          echo "CI Pipeline passed successfully. Triggering deployment to Render..."
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
