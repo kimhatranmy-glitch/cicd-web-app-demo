@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000;
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-  res.end('CI/CD Web App is running live on Render! Bài tập lớp môn Điện Toán Đám Mây lớp Đ23HT1');
+  res.end('CI/CD Web App is running live on Render! TruongGiaQuyen & HaTranMyKim');
 });
 
 // Chỉ mở cổng listen khi chạy trực tiếp (giúp Jest test không bị kẹt)
